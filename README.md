@@ -4,4 +4,4 @@ Anarchy Online Nanoprogram Lister for showing Nanos either in your library, or t
 Heavily under construction, database copied from IA:Light
 with BudaBot NanoLine listings added in, until I learn to rip my own.
 
-HTML5 PHP5 and SQLite until I learn more C#
+HTML5 PHP5 and SQLite3 until I learn more C#
