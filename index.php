@@ -20,6 +20,7 @@
 			table tr.header
 			{
             background-color: #DDDDDD;
+            text-align: center;
 			}
 			
 			table tr.title
@@ -68,8 +69,8 @@
 	</head>
 	<body>
 		<h1 style=" text-align: center;"><b>NanoLine Lister for Anarchy Online</b></h1>
-		<input name="prefs" type="file"><br>
 		Select your character's Prefs.xml file to show what nanos you already have. (not implemented yet)<br>
+		<input name="prefs" type="file"><br>
 		<details> <i>In older copies of Windows this is in your Anarchy Online
 			folder: <br>
 			&nbsp;&nbsp;&nbsp; <u>{PROGRAMS}\Funcom\Anarchy
@@ -81,13 +82,13 @@
 		<table>
 			<tbody>
 				<tr class="header">
-					<td> <b>profession</b> </td>
-					<td> <b>nanoline</b> </td>
-					<td> <b>ql</b> </td>
-					<td> <b>name</b> </td>
-					<td> <b>aoid</b> </td>
-					<td> <b>icon</b> </td>
-					<td> <b>location</b> </td>
+					<td> <b>Profession</b> </td>
+					<td> <b>NanoLine</b> </td>
+					<td> <b>QL</b> </td>
+					<td> <b>Name</b> </td>
+					<td> <b>AOID</b> </td>
+					<td> <b>Icon</b> </td>
+					<td> <b>Location</b> </td>
 				</tr>
 				<?php 
 					$db = new SQLite3('aoitems.db'); 
@@ -118,16 +119,15 @@
 					$i = 0; 
 					
 					while($res = $result->fetchArray(SQLITE3_ASSOC)){ 
-						echo "<tr>\n\r";
-						echo "	<td align='left'> {$res['profession']} </td>\n\r";
-						echo "	<td align='left'> {$res['nanoline']} </td>\n\r";
-						echo "	<td align='right'> {$res['ql']} </td>\n\r";
-						echo "	<td align='left'> {$res['name']} </td>\n\r";
-						echo "	<td align='right'> {$res['aoid']} </td>\n\r";
-						echo "	<td align='right'> {$res['icon']} </td>\n\r";
-						echo "	<td align='left'> {$res['location']} </td>\n\r";
-						echo "</tr>\n\r";
-						
+						echo "\t\t\t\t<tr>\n\r";
+						echo "\t\t\t\t\t<td align='left'> {$res['profession']} </td>\n\r";
+						echo "\t\t\t\t\t<td align='left'> {$res['nanoline']} </td>\n\r";
+						echo "\t\t\t\t\t<td align='right'> {$res['ql']} </td>\n\r";
+						echo "\t\t\t\t\t<td align='left'> {$res['name']} </td>\n\r";
+						echo "\t\t\t\t\t<td align='right'> {$res['aoid']} </td>\n\r";
+						echo "\t\t\t\t\t<td align='right'> {$res['icon']} </td>\n\r";
+						echo "\t\t\t\t\t<td align='left'> {$res['location']} </td>\n\r";
+						echo "\t\t\t\t</tr>\n\r";
 					}
 				?>
 			</tbody>
