@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 	<head>
-		<meta content="text/html; charset=utf-8" http-equiv="content-type">
+		<meta content="text/html; charset=utf-8" http-equiv="content-type"/>
 		<title>Nanos</title>
 		<style type="text/css">
 			table
@@ -23,52 +23,17 @@
             text-align: center;
 			}
 			
-			table tr.title
-			{
-            background-color: #EEEEEE;
-			}
-			
 			table tr td
 			{
             padding: 0px 3px 0px 3px;
             border-style: solid;
             border-width: 1px;
             border-color: #666666;
-			}
-			
-			table tr td.null
-			{
-            color: #999999;
-            text-align: center;
-            padding: 0px 3px 0px 3px;
-            border-style: solid;
-            border-width: 1px;
-            border-color: #666666;
-			}
-			
-			table tr td.separator
-			{
-            padding: 0px 3px 0px 3px;
-            border-style: solid;
-            border-width: 1px;
-            border-color: #666666;
-            background-color: #DDDDDD;
-			}
-			
-			table tr td.rownum
-			{
-            padding: 0px 3px 0px 3px;
-            border-style: solid;
-            border-width: 1px;
-            border-color: #666666;
-            background-color: #DDDDDD;
-            text-align: right;
-			}
-			
+			}			
 		</style>
 	</head>
 	<body>
-		<h1 style=" text-align: center;"><b>NanoLine Lister for Anarchy Online</b></h1>
+		<h1 style="text-align: center;"><b>NanoLine Lister for Anarchy Online</b></h1>
 		Select your character's Prefs.xml file to show what nanos you already have. (not implemented yet)<br>
 		<input name="prefs" type="file"><br>
 		<details> <i>In older copies of Windows this is in your Anarchy Online
@@ -86,51 +51,30 @@
 					<td> <b>NanoLine</b> </td>
 					<td> <b>QL</b> </td>
 					<td> <b>Name</b> </td>
-					<td> <b>AOID</b> </td>
 					<td> <b>Icon</b> </td>
 					<td> <b>Location</b> </td>
 				</tr>
 				<?php 
-					$db = new SQLite3('aoitems.db'); 
+					$db = new SQLite3('nanocrystals.db3'); 
 					
-					$sql = "SELECT nanos.profession,
-					nanolines.name AS nanoline,
-					aoItems.ql,
-					aoItems.name,
-					aoItems.aoid,
-					aoItems.icon,
-					nanos.location
-					FROM aoItems
-					JOIN
-					nanos ON aoItems.aoid = nanos.lowid
-					JOIN
-					nano_nanolines_ref ON nanos.lowid = nano_nanolines_ref.lowid
-					JOIN
-					nanolines ON nano_nanolines_ref.nanolineid = nanolines.id
-					ORDER BY nanos.profession ASC,
-					nanoline ASC,
-					aoItems.ql ASC,
-					aoItems.name ASC;"; 
+					$sql = "SELECT * FROM 'nanocrystals'
+					ORDER BY profession ASC,
+					nanoline ASC, ql ASC, name ASC;"; 
 					
 					$result = $db->query($sql);//->fetchArray(SQLITE3_ASSOC); 
-					
-					$row = array(); 
-					
-					$i = 0; 
 					
 					while($res = $result->fetchArray(SQLITE3_ASSOC)){ 
 						echo "\t\t\t\t<tr>\n\r";
 						echo "\t\t\t\t\t<td align='left'> {$res['profession']} </td>\n\r";
 						echo "\t\t\t\t\t<td align='left'> {$res['nanoline']} </td>\n\r";
 						echo "\t\t\t\t\t<td align='right'> {$res['ql']} </td>\n\r";
-						echo "\t\t\t\t\t<td align='left'> {$res['name']} </td>\n\r";
-						echo "\t\t\t\t\t<td align='right'> {$res['aoid']} </td>\n\r";
-						echo "\t\t\t\t\t<td align='right'> {$res['icon']} </td>\n\r";
+						echo "\t\t\t\t\t<td align='left'> <a href='https://aoitems.com/item/{$res['aoid']}/'>{$res['name']}</a> </td>\n\r";
+						echo "\t\t\t\t\t<td align='center'> <img alt='Icon #{$res['icon']}' src='https://static.aoitems.com/icon/{$res['icon']}' hspace='2' vspace='2' height='48' width='48' /> </td>\n\r";
 						echo "\t\t\t\t\t<td align='left'> {$res['location']} </td>\n\r";
 						echo "\t\t\t\t</tr>\n\r";
 					}
 				?>
 			</tbody>
-		</table>
+		</table> <p>Uses links and icons from <a href='https://aoitems.com/'>AOItems.com</a></p>
 	</body>
 </html>					
